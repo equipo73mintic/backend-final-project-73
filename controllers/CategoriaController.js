@@ -14,9 +14,9 @@ module.exports = {
             }
         } catch (error) {
             res.status(500).send({
-                message: "Ha ocurrido un "+ error
+                message: "Has ocurred an "+ error
             })
-            next(err);
+            next(error);
         }
     },
 
@@ -30,13 +30,13 @@ module.exports = {
                 categoria: categoria
             });
         })
-        .catch(err =>{
+        .catch(error =>{
             res.status(400).send({
                 created: false,
                 categoria: null,
-                reason: err + "."
+                reason: error + "."
             });
-            next(err);
+            next(error);
         });
     },
 
@@ -64,9 +64,10 @@ module.exports = {
                 });
             }
         } catch (error) {
-            res.status(500).send({ // Cualquier otro error
-                error: error +""
-            });    
+            res.status(500).send({
+                message: "Has ocurred an "+ error
+            })
+            next(error);    
         }  
     }, 
 
@@ -123,11 +124,11 @@ module.exports = {
         try {
             const reg = await db.Categoria.destroy({ where: { id: req.body.id }});
             res.status(200).json(reg);
-        } catch (e) {
+        } catch (error) {
             res.status(500).send({
-                message: 'Ocurrió un error'
-            });
-            next(e);
+                message: "Has ocurred an "+ error
+            })
+            next(error);
         }
     }
     

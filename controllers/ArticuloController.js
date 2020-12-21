@@ -15,11 +15,11 @@ module.exports = {
         .then(articulos =>{
             res.status(200).json( articulos )
         })
-        .catch(err =>{
-            res.status(500).send(
-                "Error => "+ err
-            )
-            next(err);
+        .catch(error =>{
+            res.status(500).send({
+                message: "Has ocurred an "+ error
+            })
+            next(error);
         });
     },
 
@@ -70,9 +70,10 @@ module.exports = {
                 });
             }
         } catch (error) {
-            res.status(500).send({ // Cualquier otro error
-                error: error +""
-            });    
+            res.status(500).send({
+                message: "Has ocurred an "+ error
+            })
+            next(error);  
         }  
     }, 
 
@@ -86,11 +87,11 @@ module.exports = {
                 estado: 1
             });
         })
-        .catch(err => {
+        .catch(error => {
             res.status(500).send({
-                message: "Houston, we have an " + err
+                message: "Houston, we have an " + error
             });
-            next(err);
+            next(error);
         });
     },
 
@@ -99,11 +100,11 @@ module.exports = {
         try {
             const reg = await db.Articulo.update({ estado: 0 }, { where: { id: req.body.id } });
             res.status(200).json(reg);
-        } catch (err) {
+        } catch (error) {
             res.status(500).send({
-                message: "Houston, we have an " + err
+                message: "Houston, we have an " + error
             });
-            next(err);
+            next(error);
         }
     },
 
@@ -112,11 +113,11 @@ module.exports = {
         try {
             const reg = await db.Articulo.destroy({ where: { id: req.body.id }});
             res.status(200).json(reg);
-        } catch (e) {
+        } catch (error) {
             res.status(500).send({
-                message: 'Ocurrió un error'
-            });
-            next(e);
+                message: "Has ocurred an "+ error
+            })
+            next(error);
         }
     }
     

@@ -11,8 +11,8 @@ exports.add = async (req, res, next) =>{
         
     } catch (error) {
         res.status(500).send({
-            message: 'Error -> '+ error
-        });
+            message: "Has ocurred an "+ error
+        })
         next(error);
     }
 }
@@ -44,11 +44,11 @@ exports.login = async(req, res, next) => {
                 message: 'User not Found'
             });
         }
-    } catch (err) {
+    } catch (error) {
         res.status(500).send({
-            message: 'Houston, we have an '+ err
+            message: 'Houston, we have an '+ error
         });
-        next(err);
+        next(error);
     }
 }
 
@@ -64,9 +64,9 @@ exports.list = async (req, res, next) =>{
     })
     .catch(err =>{
         res.status(500).send({
-            message: 'Has ocurred an '+ err
-        });
-        next(err);
+            message: "Has ocurred an "+ error
+        })
+        next(error);
     });
 }
 
@@ -97,11 +97,11 @@ exports.update = async (req, res, next) =>{
                 message: 'User not Found'   
             });
         }
-    } catch (err){
+    } catch (error){
         res.status(500).send({
-            message: "Opps! "+ err
-        });
-        next(err);
+            message: "Has ocurred an "+ error
+        })
+        next(error);
     }
 }
 
@@ -121,11 +121,11 @@ exports.activate = async(req, res, next) =>{
             });
         }
     })
-    .catch(err => {
+    .catch(error => {
         res.status(500).send({
-            message: "Houston, we have an " + err
-        });
-        next(err);
+            message: "Has ocurred an "+ error
+        })
+        next(error);
     });
 }
 
@@ -163,11 +163,11 @@ exports.query = async(req, res, next) =>{
         } else {
             res.status(200).json( user );
         }
-    } catch (e) {
+    } catch (error) {
         res.status(500).send({
-            message: 'Ocurrió un error'
-        });
-        next(e);
+            message: "Has ocurred an "+ error
+        })
+        next(error);
     }
 
 }
