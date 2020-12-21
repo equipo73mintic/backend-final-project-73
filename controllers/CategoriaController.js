@@ -13,9 +13,9 @@ module.exports = {
                 );
             }
         } catch (error) {
-            res.status(500).send(
-                "Error => "+ error
-            )
+            res.status(500).send({
+                message: "Ha ocurrido un "+ error
+            })
             next(err);
         }
     },
